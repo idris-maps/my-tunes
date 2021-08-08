@@ -22,9 +22,8 @@ export const readTags = async (fileName: string): Promise<TuneInfo> =>
     })
   )
 
-export const writeTags = async ({ album, artist, title, fileName }: TuneInfo): Promise<boolean> =>
+export const writeTags = async (fileName: string, tags: ID3.Tags): Promise<boolean> =>
   new Promise(resolve => {
-    const tags: ID3.Tags = { album, artist, title }
     const res = ID3.update(tags, `${config.audioDir}/${fileName}`)
     return resolve(typeof(res) === 'boolean' && res)
   })

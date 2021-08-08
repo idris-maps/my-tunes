@@ -1,4 +1,3 @@
-import _search from './search'
+export * as search from './search'
+export * as tags from './tags'
 export { handle } from './utils'
-
-export const search = _search
