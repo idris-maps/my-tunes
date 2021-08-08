@@ -1,0 +1,16 @@
+PUT http://localhost:3000/tags/BN1WwnEDWAM.ogg
+Content-Type: application/json
+
+{
+  "artist": "The Clash"
+}
+
+###
+
+POST http://localhost:3000/download
+Content-Type: application/json
+
+{
+  "webpage_url": "https://www.youtube.com/watch?v=BN1WwnEDWAM",
+  "fulltitle": "Should I stay or should I go"
+}

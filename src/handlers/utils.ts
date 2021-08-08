@@ -1,4 +1,5 @@
 import { Request, Response } from '@tinyhttp/app'
+import { path } from 'ramda'
 
 export interface HandlerResponse {
   status: number
@@ -27,3 +28,14 @@ export const handle = (handler: Handler) =>
       return res.sendStatus(500)
     }
   }
+
+export const getString = (
+  from: 'body' | 'query' | 'params',
+  key: string,
+  props: HandlerProps<any, any, any>
+) => {
+  const value = path([from, key], props)
+  return !value || String(value).trim().length === 0
+    ? undefined
+    : String(value)
+}
