@@ -2,7 +2,7 @@ import { App } from '@tinyhttp/app'
 import { json } from 'body-parser'
 import serve from 'serve-static'
 import config from './config'
-import { handle, search, tags, download } from './handlers'
+import { artists, handle, search, tags, download } from './handlers'
 import { tunes } from './id3'
 
 const app = new App()
@@ -13,6 +13,9 @@ app.use('/tunes', serve(config.audioDir))
 app.get('/search/artists', handle(search.artists))
 app.get('/search/local', handle(search.local))
 app.get('/search/yt', handle(search.yt))
+
+app.get('/artists', handle(artists.all))
+app.get('/artists/:artist/songs', handle(artists.songs))
 
 app.put('/tags/:fileName', handle(tags.update))
 
