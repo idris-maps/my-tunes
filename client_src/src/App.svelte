@@ -1,8 +1,12 @@
 <script lang="ts">
-  import { backendUrl } from './utils'
-  console.log(backendUrl)
+  import Player from './components/Player.svelte'
+  import SearchLocal from './components/SearchLocal.svelte'
+  import type { Tune } from './utils'
+
+  let tune: Tune | undefined
 </script>
 
 <main>
-  <h1>Hello!</h1>
+  <Player {tune} />
+  <SearchLocal onSelect={d => tune = d} />
 </main>

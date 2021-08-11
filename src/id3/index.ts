@@ -44,7 +44,7 @@ const initTunes = () => {
   return {
     refresh: async () => {
       data = await readAllTags()
-      artists = uniq(data.map(d => d.artist.trim())).sort()
+      artists = uniq(data.map(d => d.artist.trim())).sort((a, b) => a.toLowerCase() > b.toLowerCase() ? 1 : -1)
       tunesFuse = new Fuse(data, { keys: ['artist', 'title'] })
       artistsFuse = new Fuse(artists.map(artist => ({ artist })), { keys: ['artist']})
       return undefined
@@ -53,9 +53,9 @@ const initTunes = () => {
     getArtists: () => artists,
     getByArtist: (artist: string) =>
       sortBy('title', data.filter(d => d.artist.toLowerCase() === artist.toLowerCase())),
-    searchArtist: (term: string, items: number = 3) =>
+    searchArtist: (term: string, items: number = 5) =>
       take(items, artistsFuse.search(term)).map(d => d.item),
-    search: (term: string, items: number = 5) =>
+    search: (term: string, items: number = 20) =>
       take(items, tunesFuse.search(term)).map(d => d.item),
   }
 }
