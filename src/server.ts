@@ -1,12 +1,17 @@
 import { App } from '@tinyhttp/app'
 import { json } from 'body-parser'
 import serve from 'serve-static'
+import cors from 'cors'
 import config from './config'
 import { artists, handle, search, tags, download } from './handlers'
 import { tunes } from './id3'
 
 const app = new App()
 app.use(json())
+
+if (process.env.DEV) {
+  app.use(cors())
+}
 
 app.use('/tunes', serve(config.audioDir))
 
