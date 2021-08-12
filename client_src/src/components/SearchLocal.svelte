@@ -1,7 +1,7 @@
 <script lang="ts">
   import Clickable from './Clickable.svelte'
   import DisplayTune from './DisplayTune.svelte'
-  import { searchLocal } from '../utils'
+  import { searchLocal, throttle } from '../utils'
   import type { Tune } from '../utils'
   
   export let onSelect: (d: Tune) => void
@@ -9,16 +9,12 @@
   let value = ''
   let tunes: Tune[] = []
 
-  const onSearch = async () => {
+  const search = throttle(searchLocal, 1000)
+
+  const onKeyUp = async () => {
     const v = value.trim()
     if (v !== '') {
-      tunes = await searchLocal(v)
-    }
-  }
-
-  const onEnter = (e: KeyboardEvent) => {
-    if (e.key === 'Enter') {
-      onSearch()
+      tunes = await search(v)
     }
   }
 
@@ -29,10 +25,9 @@
   }
 </script>
 
-<input bind:value on:keyup={onEnter} />
-<button on:click={onSearch}>Search</button>
-{#each tunes as tune, i}
-  <Clickable onClick={onClick(tune)} focus={i === 0}>
+<input bind:value on:keyup={onKeyUp} />
+{#each tunes as tune}
+  <Clickable onClick={onClick(tune)}>
     <div class="tune">
       <DisplayTune {tune} />
     </div>
