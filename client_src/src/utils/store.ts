@@ -12,4 +12,6 @@ export const queue = {
     queueStore.update(prev => [tune, ...prev.filter(d => d.fileName !== tune.fileName)]),
   removeFirst: () =>
     queueStore.update(([_, ...rest]) => rest),
+  setMeta: (tune: Tune) =>
+    queueStore.update(prev => prev.map(d => d.fileName === tune.fileName ? tune : d)),
 }

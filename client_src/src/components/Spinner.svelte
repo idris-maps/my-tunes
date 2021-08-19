@@ -25,10 +25,10 @@
     width: 64px;
     height: 64px;
     margin: 8px;
-    border: 8px solid var(--color);
+    border: 8px solid blue;
     border-radius: 50%;
     animation: spinner 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-    border-color: var(--color) transparent transparent transparent;
+    border-color: blue transparent transparent transparent;
   }
   .spinner div:nth-child(1) {
     animation-delay: -0.45s;

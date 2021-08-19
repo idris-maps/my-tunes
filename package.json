@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@svelte-parts/modal": "^0.0.19",
     "@types/body-parser": "^1.19.1",
     "@types/cors": "^2.8.12",
     "@types/node": "^16.4.13",
