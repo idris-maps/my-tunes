@@ -11,7 +11,7 @@
 
 {#each $store as tune, i (tune.fileName)}
   <div in:fade out:scale class="item">
-    <div>
+    <div class="title">
       <DisplayTune {tune} />
     </div>
     <div class="btns">
@@ -34,5 +34,10 @@
   }
   .btns {
     text-align: right;
+  }
+  .title {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
   }
 </style>
