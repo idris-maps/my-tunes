@@ -1,6 +1,6 @@
 <script lang="ts">
   import DisplayTune from './DisplayTune.svelte'
-  import { url } from '../utils'
+  import { url, queue } from '../utils'
   import type { Tune } from '../utils'
 
   export let tune: Tune | undefined
@@ -20,7 +20,11 @@
     <DisplayTune {tune} />
   {/if}
 </div>
-<audio bind:this={audio} controls />
+<audio
+  bind:this={audio}
+  on:ended={() => queue.removeFirst()}
+  controls
+/>
 
 <style>
   div {

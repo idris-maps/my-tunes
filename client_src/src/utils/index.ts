@@ -1,3 +1,5 @@
+export * from './store'
+
 // @ts-ignore - injected by rollup, ts does not know about it 
 export const URL: string = __backendUrl__
 export const url = (d: string) => `${URL}${d}`
