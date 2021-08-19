@@ -37,5 +37,8 @@
 <style>
   .tune {
     padding: 0.2em;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
   }
 </style>
