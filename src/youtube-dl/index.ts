@@ -45,6 +45,6 @@ export const search = async (term: string, numberOfResults: number = 5) => {
 }
 
 export const download = async (url: string) => {
-  await run(`cd ${config.audioDir} && youtube-dl --extract-audio --audio-format vorbis ${url} --id`)
+  await run(`cd ${config.audioDir} && youtube-dl --extract-audio --audio-format mp3 ${url} --id`)
   return url.split('watch?v=')[1]
 }

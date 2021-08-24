@@ -1,6 +1,6 @@
 import { getString, Handler } from './utils'
 import { download } from '../youtube-dl'
-import { readTags, writeTags } from '../id3'
+import { tunes, readTags, writeTags } from '../id3'
 
 export const fromYt: Handler = async props => {
   const url = getString('body', 'webpage_url', props)
@@ -15,8 +15,9 @@ export const fromYt: Handler = async props => {
   }
 
   const id = await download(url)
-  const fileName = `${id}.ogg`
+  const fileName = `${id}.mp3`
   await writeTags(fileName, { artist, title })
+  tunes.refresh()
 
-  return { status: 200, json: { id: await readTags(fileName) } }
+  return { status: 200, json: await readTags(fileName) }
 }

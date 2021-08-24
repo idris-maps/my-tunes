@@ -1,9 +1,8 @@
 import { App } from '@tinyhttp/app'
 import { json } from 'body-parser'
-import serve from 'serve-static'
 import cors from 'cors'
 import config from './config'
-import { artists, handle, search, tags, download } from './handlers'
+import { artists, handle, search, tags, download, audioFiles } from './handlers'
 import { tunes } from './id3'
 
 const app = new App()
@@ -13,7 +12,7 @@ if (process.env.DEV) {
   app.use(cors())
 }
 
-app.use('/tunes', serve(config.audioDir))
+app.get('/tunes/:fileName', audioFiles)
 
 app.get('/search/artists', handle(search.artists))
 app.get('/search/local', handle(search.local))

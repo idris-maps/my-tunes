@@ -1,5 +1,5 @@
 import { pick } from 'ramda'
-import { writeTags, readTags } from '../id3'
+import { writeTags, readTags, tunes } from '../id3'
 import { Handler } from './utils'
 
 export const update: Handler = async ({ params, body }) => {
@@ -12,6 +12,7 @@ export const update: Handler = async ({ params, body }) => {
 
   try {
     await writeTags(fileName, tags)
+    tunes.refresh()
     return { status: 200, json: await readTags(fileName) }
   } catch (e) {
     return { status: 404 }
