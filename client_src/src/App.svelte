@@ -1,9 +1,8 @@
 <script lang="ts">
   import Player from './components/Player.svelte'
-  import SearchLocal from './components/SearchLocal.svelte'
+  import Search from './components/Search.svelte'
   import Queue from './components/Queue.svelte'
   import { queue } from './utils'
-  import type { Tune } from './utils'
 
   const { store } = queue
 
@@ -11,7 +10,7 @@
   
   $: {
     const first = $store[0]
-    if (first?.fileName && first.fileName !== tune?.fileName) {
+    if (first?.fileName) {
       tune = first
     }
   }
@@ -22,7 +21,7 @@
   <Player {tune} />
   <div class="split">
     <div>
-      <SearchLocal onSelect={queue.add} />
+      <Search onSelect={queue.add} />
     </div>
     <div>
       <Queue />
@@ -33,6 +32,8 @@
 <style>
   .split {
     display: grid;
-    grid-template-columns: repeat(2, 50%);
+    grid-template-columns: repeat(2, calc(50% - 1em));
+    column-gap: 2em;
+    padding: 1em;
   }
 </style>

@@ -8,7 +8,10 @@
   let audio: HTMLAudioElement
   $: {
     if (audio && tune) {
-      audio.src = url(`tunes/${tune.fileName}`)
+      const tuneUrl = url(`tunes/${tune.fileName}`)
+      if (audio.src !== tuneUrl) {
+        audio.src = tuneUrl
+      }
       audio.play()
       audio.focus()
     }

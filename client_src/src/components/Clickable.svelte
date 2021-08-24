@@ -31,10 +31,10 @@
     cursor: pointer;
   }
   div:hover {
-    background-color: lightgray;
+    background-color: var(--bg-color-highlight);
   }
   div:focus {
-    background-color: lightgray;
+    background-color: var(--bg-color-highlight);
   }
   .inline {
     display: inline;

@@ -1,8 +1,5 @@
 export * from './store'
-
-// @ts-ignore - injected by rollup, ts does not know about it 
-export const URL: string = __backendUrl__
-export const url = (d: string) => `${URL}${d}`
+export * from './requests'
 
 export interface Tune {
   artist: string
@@ -10,14 +7,18 @@ export interface Tune {
   title: string
 }
 
-const get = async <T = any>(url: string): Promise<T> => {
-  const res = await fetch(url)
-  return res.json()
+export interface SearchResult {
+  artist?: string
+  channel: string
+  creator?: string
+  duration: number
+  fulltitle: string
+  id: string
+  tags?: string[]
+  uploader?: string
+  view_count: number
+  webpage_url: string
 }
-
-export const fetchArtists = () => get<string[]>(url('artists'));
-
-export const searchLocal = (term: string) => get<Tune[]>(url(`search/local?term=${term}`))
 
 const wait = (ms: number) => new Promise((resolve) => {
   setTimeout(resolve, ms)
@@ -47,4 +48,12 @@ export const throttle = <A = any, B = void>(func: (d: A) => Promise<B>, ms: numb
     }
   }
   return onCall
+}
+
+const numPad = (d: number) => d < 10 ? `0${d}` : String(d)
+
+export const formatDuration = (seconds: number) => {
+  const m = Math.floor(seconds / 60)
+  const s = seconds % 60
+  return numPad(m)  + ':' + numPad(s)
 }

@@ -2,7 +2,7 @@
   import { scale } from 'svelte/transition'
   import Modal from '@svelte-parts/modal'
   let open = false
-  const toggle = () => { console.log('WTF', open); open = !open }
+  const toggle = () => { open = !open }
 </script>
 
 <slot name="button" {toggle} />
